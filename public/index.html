@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>AfriShip – Calculateur de prix</title>
+</head>
+<body>
+  <h1>AfriShip – Calculateur</h1>
+
+  <label>
+    Poids (kg) :
+    <input type="number" id="poids" />
+  </label>
+  <br /><br />
+
+  <label>
+    Code promo :
+    <input type="text" id="codePromo" />
+  </label>
+  <br /><br />
+
+  <button onclick="calculerPrix()">Calculer le prix</button>
+
+  <p id="resultat"></p>
+
+  <script>
+    async function calculerPrix() {
+      const poids = document.getElementById("poids").value;
+      const codePromo = document.getElementById("codePromo").value;
+
+      const response = await fetch("/calculate-price", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          poids: Number(poids),
+          codePromo: codePromo || undefined
+        })
+      });
+
+      const data = await response.json();
+
+      const resultat = document.getElementById("resultat");
+
+      if (data.success) {
+        resultat.textContent = "Prix total : " + data.price + " €";
+      } else {
+        resultat.textContent = "Erreur : " + data.error;
+      }
+    }
+  </script>
+</body>
+</html>
+
+
