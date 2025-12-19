@@ -3,16 +3,24 @@ import express from "express";
 import path from "path";
 import type { Request, Response } from "express";
 import { calculPrixColis } from "./pricing.service2";
+import cors from "cors";
+
 
 const app = express();
 
 /**
- * 1️⃣ Middleware JSON
+ * 1️) Middleware JSON
  */
 app.use(express.json());
 
 /**
- * 2️⃣ FRONT — page HTML AfriShip
+ *  2) Import de CORS pour Chrome 
+ */
+app.use(cors());
+
+
+/**
+ * 3) FRONT — page HTML AfriShip
  */
 app.get("/", (req, res) => {
   res.sendFile(
@@ -21,7 +29,7 @@ app.get("/", (req, res) => {
 });
 
 /**
- * 3️⃣ API — calcul du prix
+ * 4) API — calcul du prix
  */
 app.post("/calculate-price", (req: Request, res: Response) => {
   const { poids, codePromo } = req.body;
