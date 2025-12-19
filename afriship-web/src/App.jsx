@@ -4,6 +4,7 @@ import { useState } from "react";
 function App() {
   const [poids, setPoids] = useState("");
   const [codePromo, setCodePromo] = useState("");
+  const [typeColis, setTypeColis] = useState("");
   const [prix, setPrix] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -67,6 +68,29 @@ function App() {
       />
 
       <br /><br />
+
+      <label>
+        Type de colis :  
+        <select
+          value={typeColis}
+          onChange={(e) => setTypeColis(e.target.value)}
+        >
+          <option value="">-- Sélectionnez --</option>
+          <option value="Documents">Documents</option>
+          <option value="Vêtements">Vêtements</option>
+          <option value="Électronique">Électronique</option>
+          <option value="Produits alimentaires">Produits alimentaires</option>
+          <option value="Médicaments">Médicaments</option>
+          <option value="Cosmétiques">Cosmétiques</option>
+          <option value="Livres">Livres</option>
+          <option value="Bijoux">Bijoux</option>
+          <option value="Artisanat">Artisanat</option>
+          <option value="Autre (à préciser)">Autre (à préciser)</option>
+        </select>
+      </label>
+      <br /><br />
+      console.log("Type colis :", typeColis);
+
 
       <button onClick={calculerPrix} disabled={loading}>
         {loading ? "Calcul..." : "Calculer le prix"}
