@@ -32,7 +32,9 @@ function App() {
           },
           body: JSON.stringify({ 
             poids: Number(poids), 
-            codePromo }),
+            codePromo,
+            typeColis
+           }),
         }
       );
 
@@ -89,7 +91,7 @@ function App() {
         </select>
       </label>
       <br /><br />
-      console.log("Type colis :", typeColis);
+     
 
 
       <button onClick={calculerPrix} disabled={loading}>
